@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using Entities.DTOs.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ namespace Business
 {
     public interface IUserService
     {
-        Task<List<User>> GetAllUsers();
+        Task<List<UserDto>> GetAllUsers();
+        Task<UserDto> AuthenticateUser(UserLoginDto user);
     }
 }

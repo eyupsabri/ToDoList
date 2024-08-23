@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.DTOs.Users
 {
-    public class User
+    public class UserDto
     {
         public int UserId { get; set; }
         public string UserName { get; set; }

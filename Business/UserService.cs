@@ -1,5 +1,5 @@
 ﻿using DAL;
-using Entities;
+using Entities.DTOs.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +16,23 @@ namespace Business
         {
             _userRepo = userRepo;
         }
-        public async Task<List<User>> GetAllUsers()
+
+        public async Task<UserDto> AuthenticateUser(UserLoginDto user)
+        {
+            var checkUser = await _userRepo.GetByEmail(user.Email);
+            if (checkUser != null && checkUser.PasswordHash == user.Password)
+            {
+                return checkUser;
+            }
+            return null;
+        }
+
+        public async Task<List<UserDto>> GetAllUsers()
         {
             var users = await _userRepo.GetAllUsers();
             return users;
         }
+
+
     }
 }

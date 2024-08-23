@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Entities;
+using Entities.DTOs.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,27 @@ namespace DAL
         {
             _context = context;
         }
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<UserDto>> GetAllUsers()
         {
             string query = "Select * from Users";
 
             using (var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryAsync<User>(query);
+                var values = await connection.QueryAsync<UserDto>(query);
                 return values.ToList();
             }
         }
 
+        public async Task<UserDto> GetByEmail(string email)
+        {
+            string query = "Select * from Users Where Email = @email";
+            var parameters = new DynamicParameters();
+            parameters.Add("@email", email);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QueryFirstOrDefaultAsync<UserDto>(query, parameters);
+                return user;
+            }
+        }
     }
 }
