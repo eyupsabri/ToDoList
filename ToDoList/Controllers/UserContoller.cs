@@ -3,6 +3,7 @@ using Entities.DTOs.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToDoList.ActionFilter;
 using ToDoList.Helpers;
 
 namespace ToDoList.Controllers
@@ -64,6 +65,26 @@ namespace ToDoList.Controllers
                 return Ok(new { accessToken = accessToken, refreshToken = refreshToken });
             }
             return Unauthorized();
+        }
+
+        [HttpGet]
+        [ServiceFilter(typeof(MyAuthActionFilter))]
+        [Route("[action]")]
+        public async Task<IActionResult> IsLoggedIn()
+        {
+            if (HttpContext.Items.ContainsKey("Email"))
+            {
+                // Retrieve the email from HttpContext.Items
+                var email = HttpContext.Items["Email"] as string;
+
+                // Use the email as needed
+                if (!string.IsNullOrEmpty(email))
+                {
+
+                    return Ok();
+                }
+            }
+            return BadRequest();
         }
     }
 }
