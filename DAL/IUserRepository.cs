@@ -9,7 +9,7 @@ namespace DAL
 {
     public interface IUserRepository
     {
-        public Task<List<UserDto>> GetAllUsers();
+        public Task<List<UserResponseDto>> GetAllUsers();
 
         public Task<UserDto> GetByEmail(string email);
     }

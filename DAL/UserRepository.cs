@@ -17,13 +17,13 @@ namespace DAL
         {
             _context = context;
         }
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserResponseDto>> GetAllUsers()
         {
-            string query = "Select * from Users";
+            string query = "Select UserId, UserName, Email, FullName, CreatedAt from Users";
 
             using (var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryAsync<UserDto>(query);
+                var values = await connection.QueryAsync<UserResponseDto>(query);
                 return values.ToList();
             }
         }

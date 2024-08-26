@@ -17,6 +17,26 @@ namespace DAL
         {
             _dapperContext = dapperContext;
         }
+
+        //public async Task<List<Task>> GetProjectByProjectId(int projectId)
+        //{
+        //    string query = @"SELECT p.ProjectName,
+        //      t.TaskId, t.TaskName, t.Status,t.Description, t.Priority, t.DueDate, t.CreatedAt, u.Username, us.Username
+        //      From Projects as p
+        //      INNER JOIN Tasks as t ON p.ProjectId=t.ProjectId 
+        //      INNER JOIN Users as u ON t.CreatedBy = u.UserId
+        //      INNER JOIN Users as us ON t.AssignedTo = us.UserId
+        //      WHERE p.ProjectId = @projectId";
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("@projectId", projectId);
+
+        //    using (var connection = _dapperContext.CreateConnection())
+        //    {
+        //        var tasks = await connection.QueryAsync<Task>(query, parameters);
+        //        return tasks.ToList();
+        //    }
+        //}
+
         public async Task<List<ProjectDto>> GetProjectsForUser(string email)
         {
             string query = @"

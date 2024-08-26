@@ -7,7 +7,7 @@ using static Entities.Enums.DbEnums;
 
 namespace Entities.DTOs.Tasks
 {
-    public class TaskDto
+    public class TaskDtoRaw
     {
         public int TaskId { get; set; }
         public string TaskName { get; set; }
@@ -15,9 +15,9 @@ namespace Entities.DTOs.Tasks
         public Status Status { get; set; }
         public Priority Priority { get; set; }
         public DateTime DueDate { get; set; }
-        public string ProjectName { get; set; }
-        public string AssignedTo { get; set; }
-        public string CreatedBy { get; set; }
+        public int ProjectId { get; set; }
+        public int AssignedTo { get; set; }
+        public int CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

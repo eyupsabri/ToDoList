@@ -28,7 +28,18 @@ namespace ToDoList.Controllers
             }
             return BadRequest();
 
-
         }
+        //[HttpGet]
+        //[Route("[action]/{projectId}")]
+        //public async Task<IActionResult> GetProject(int projectId)
+        //{
+        //    if (HttpContext.Items["Email"] is string email)
+        //    {
+        //        var projects = await _projectService.GetAllProjectsForUser(email);
+        //        return Ok(projects);
+        //    }
+        //    return BadRequest();
+
+        //}
     }
 }

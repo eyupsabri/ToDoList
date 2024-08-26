@@ -10,5 +10,6 @@ namespace DAL
     public interface ITaskRepository
     {
         Task<List<TaskDto>> GetAllTasks(int projectId);
+        Task<bool> UpdateTaskStatus(TaskStatusUpdateDto task);
     }
 }

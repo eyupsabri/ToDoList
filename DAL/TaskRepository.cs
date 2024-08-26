@@ -23,14 +23,16 @@ namespace DAL
               SELECT 
                TaskId
               ,TaskName
-              ,Description
+              ,t.Description
               ,Status
               ,Priority
               ,DueDate
-              ,ProjectId
+              ,p.ProjectName
               ,us.Username as 'CreatedBy'
 	          ,u.Username as 'AssignedTo'
+              , p.ProjectName
           FROM Tasks as t
+          LEFT OUTER JOIN Projects as p ON p.ProjectId = t.ProjectId
           INNER JOIN Users as u ON t.AssignedTo = u.UserId
           INNER JOIN Users as us ON t.CreatedBy = us.UserId
           WHERE t.ProjectId = @projectId";
@@ -41,6 +43,23 @@ namespace DAL
             {
                 var projects = await connection.QueryAsync<TaskDto>(query, parameters);
                 return projects.ToList();
+            }
+        }
+
+        public async Task<bool> UpdateTaskStatus(TaskStatusUpdateDto task)
+        {
+            var query = @"
+                UPDATE Tasks
+                    SET Status = @status
+                    WHERE TaskId = @taskId;
+            ";
+            var parameters = new DynamicParameters();
+            parameters.Add("@status", task.Status);
+            parameters.Add("@taskId", task.TaskId);
+            using (var connection = _dapperContext.CreateConnection())
+            {
+                var result = await connection.ExecuteAsync(query, parameters);
+                return result > 0;
             }
         }
     }

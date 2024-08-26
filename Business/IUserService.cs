@@ -9,7 +9,7 @@ namespace Business
 {
     public interface IUserService
     {
-        Task<List<UserDto>> GetAllUsers();
+        Task<List<UserResponseDto>> GetAllUsers();
         Task<UserDto> AuthenticateUser(UserLoginDto user);
     }
 }

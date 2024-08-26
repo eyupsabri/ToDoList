@@ -27,7 +27,7 @@ namespace Business
             return null;
         }
 
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserResponseDto>> GetAllUsers()
         {
             var users = await _userRepo.GetAllUsers();
             return users;

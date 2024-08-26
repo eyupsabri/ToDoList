@@ -20,5 +20,12 @@ namespace Business
             var tasks = await _taskRepository.GetAllTasks(projectId);
             return tasks;
         }
+
+
+        public async Task<bool> UpdateTaskStatus(TaskStatusUpdateDto task)
+        {
+            var result = await _taskRepository.UpdateTaskStatus(task);
+            return result;
+        }
     }
 }

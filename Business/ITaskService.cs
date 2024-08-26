@@ -10,5 +10,6 @@ namespace Business
     public interface ITaskService
     {
         public Task<List<TaskDto>> GetAllTasks(int projectId);
+        public Task<bool> UpdateTaskStatus(TaskStatusUpdateDto task);
     }
 }
